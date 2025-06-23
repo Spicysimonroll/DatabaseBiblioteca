@@ -1,0 +1,7 @@
+{
+    "_id": { "$oid": "665a30000000000000000001" },
+    "name": "Alice Johnson",
+    "email": "alice@example.com",
+    "memberSince": { "$date": "2021-01-15T00:00:00Z" },
+    "preferredGenres": ["Fantasy", "Historical"]
+}

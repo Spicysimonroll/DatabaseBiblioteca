@@ -1,12 +1,10 @@
 services:
   mongodb:
-    image: mongo
+    image: mongo:7
     restart: always
     container_name: database
     environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: supersecret
-      MONGO_INITDB_DATABASE: my_mongo_db
+      MONGO_INITDB_DATABASE: library_example
     ports:
       - "27017:27017"
     
@@ -24,8 +22,6 @@ services:
       #mongodb conn
       LABEL_con1: "MongoDB"
       SERVER_con1: mongodb
-      USER_con1: admin
-      PASSWORD_con1: supersecret
       PORT_con1: 27017
       ENGINE_con1: mongo@dbgate-plugin-mongo
 

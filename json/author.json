@@ -1,0 +1,7 @@
+{
+    "_id": { "$oid": "665a10000000000000000001" },
+    "name": "Nora Freeman",
+    "birthYear": 1970,
+    "nationality": "Canadian",
+    "genres": ["Mystery", "Thriller"]
+}

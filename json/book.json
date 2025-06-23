@@ -1,0 +1,10 @@
+{
+    "_id": { "$oid": "665a20000000000000000001" },
+    "title": "The Vanishing Signal",
+    "yearPublished": 2015,
+    "genre": "Science Fiction",
+    "authorIds": [
+        { "$oid": "665a10000000000000000002" },
+        { "$oid": "665a10000000000000000003" }
+    ]
+}
