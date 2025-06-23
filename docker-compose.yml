@@ -1,0 +1,33 @@
+services:
+  mongodb:
+    image: mongo
+    restart: always
+    container_name: database
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: supersecret
+      MONGO_INITDB_DATABASE: my_mongo_db
+    ports:
+      - "27017:27017"
+    
+  dbgate:
+    image: dbgate/dbgate
+    container_name: dbgate
+    restart: always
+    ports:
+      - 3000:3000
+    environment:
+      INSTALL_PLUGINS: dbgate-plugin-mongo
+
+      CONNECTIONS: con1
+
+      #mongodb conn
+      LABEL_con1: "MongoDB"
+      SERVER_con1: mongodb
+      USER_con1: admin
+      PASSWORD_con1: supersecret
+      PORT_con1: 27017
+      ENGINE_con1: mongo@dbgate-plugin-mongo
+
+    depends_on:
+      - mongodb
