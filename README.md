@@ -1,5 +1,10 @@
 # 📚 Database biblioteca
 
+- [Setup](#-setup)
+- [Struttura db](#️-struttura-del-database)
+- [Esempi](#-esempi-di-struttura)
+- [Popolamento](#-popolamento)
+
 
 ## 🛠️ Setup
 
@@ -171,7 +176,7 @@ Per popolare il database con i dati di esempio:
     docker start database 
     ```
 
-> `database` è il nome del container
+    > `database` è il nome del container
 
 3. Popola il database eseguendo lo script `seed.js`:
 
