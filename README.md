@@ -4,6 +4,7 @@
 - [Struttura db](#️-struttura-del-database)
 - [Esempi](#-esempi-di-struttura)
 - [Popolamento](#-popolamento)
+- [Conclusione](#-arresto-dei-containers)
 
 
 ## 🛠️ Setup
@@ -40,7 +41,7 @@ Assicurati che Docker sia installato sul tuo computer prima di procedere.
     docker-compose up
     ```
 
-    > 📝 Questo comando avvia tutti i container necessari, incluso MongoDB.
+    > 📝 Questo comando  avvia i containers necessari, creandoli se non esistono.
 
 4. Verifica che i containers siano attivi
 
@@ -70,8 +71,9 @@ Assicurati che Docker sia installato sul tuo computer prima di procedere.
     http://localhost:3000
     ```
 
-    > ❗ Il database `library_example` non sarà visibile in DbGate finché non contiene almeno una collezione con dati.
-    > Per renderlo visibile, esegui lo script `seed.js` o crea un documento manualmente.
+    > ❗ Il database `library_example` non sarà visibile in DbGate finché non conterrà almeno una collezione con dati.
+
+    > 👍🏻 Per renderlo visibile, esegui lo script `seed.js` o crea un documento manualmente.
 
 
 ## 🗃️ Struttura del database
@@ -189,3 +191,12 @@ Per popolare il database con i dati di esempio:
 
 4. Apri DBGate su `http://localhost:3000` e premi **Refresh**: il database `library_example` ora sarà visibile con le 
    collezioni popolate.
+
+
+## 🛑 Arresto dei containers
+
+Al termine del lavoro con il database, è buona pratica fermare i container per liberare risorse del sistema:
+
+```bash
+docker-compose down
+```
