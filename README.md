@@ -1,6 +1,10 @@
 # 📚 Database biblioteca
 
+Questo progetto permette di utilizzare **MongoDB** tramite **Docker**. 
+Assicurati che Docker sia installato sul tuo computer prima di procedere.
+
 - [Setup](#-setup)
+- [Istruzioni d'uso](#-istruzioni-duso)
 - [Struttura db](#️-struttura-del-database)
 - [Esempi](#-esempi-di-struttura)
 - [Popolamento](#-popolamento)
@@ -9,71 +13,69 @@
 
 ## 🛠️ Setup
 
-Questo progetto utilizza **MongoDB** tramite **Docker**. 
-Assicurati che Docker sia installato sul tuo computer prima di procedere.
-
 ### 🔧 Requisiti
 
 - Docker
 - Docker Compose
 
-### 💻 Istruzioni per l'installazione
+### ⚙️ Istruzioni per l'installazione
 
-1. Installa Docker
+**1. Installa Docker**
 
-    Se non lo hai già fatto, installa [Docker Desktop](https://www.docker.com/get-started/) seguendo la guida ufficiale per il 
-    tuo sistema operativo.
+Se non lo hai già fatto, installa [Docker Desktop](https://www.docker.com/get-started/) seguendo la guida ufficiale per il tuo sistema operativo.
 
-2. Clona il repository
+**2. Clona il repository**
 
-    Scarica il progetto sul tuo computer. Da terminale:
+Scarica il progetto sul tuo computer. Da terminale:
 
-    ```bash
-    git clone https://github.com/Spicysimonroll/DatabaseBiblioteca.git
-    cd DatabaseBiblioteca
-    ```
+```bash
+git clone https://github.com/Spicysimonroll/DatabaseBiblioteca.git
+cd DatabaseBiblioteca
+```
 
-3. Avvia i containers
+## 💻 Istruzioni d'uso
 
-    Sempre dal terminale, nella cartella del progetto:
+**1. Avvia i containers**
 
-    ```bash
-    docker-compose up
-    ```
+Sempre dal terminale, nella cartella del progetto:
 
-    > 📝 Questo comando  avvia i containers necessari, creandoli se non esistono.
+```bash
+docker-compose up -d
+```
 
-4. Verifica che i containers siano attivi
+> 📝 Questo comando avvia i container necessari, creandoli se non esistono, e li esegue in background.
 
-    Per controllare che i containers siano stati avviati correttamente, esegui:
+**2. Verifica che i containers siano attivi**
 
-    ```bash
-    docker ps
-    ```
+Per controllare che i containers siano stati avviati correttamente, esegui:
 
-    Dovresti vedere una lista con i container attivi, tra cui MongoDB e la GUI.
+```bash
+docker ps
+```
 
-    Esempio di riferimento: 
+Dovresti vedere una lista con i container attivi, tra cui MongoDB e la GUI.
 
-    ```bash
-    docker ps
+Esempio di riferimento: 
 
-    CONTAINER ID   IMAGE           COMMAND                  CREATED          STATUS          PORTS                      NAMES
-    4dc281cc0d98   dbgate/dbgate   "docker-entrypoint.s…"   2 seconds ago   Up 2 seconds   0.0.0.0:3000->3000/tcp       dbgate
-    0d4931fffbd0   mongo           "docker-entrypoint.s…"   2 seconds ago   Up 2 seconds   0.0.0.0:27017->27017/tcp     database
-    ```
+```bash
+docker ps
 
-5. Accesso all'interfaccia grafica (GUI)
+CONTAINER ID   IMAGE           COMMAND                  CREATED          STATUS          PORTS                      NAMES
+4dc281cc0d98   dbgate/dbgate   "docker-entrypoint.s…"   2 seconds ago   Up 2 seconds   0.0.0.0:3000->3000/tcp       dbgate
+0d4931fffbd0   mongo           "docker-entrypoint.s…"   2 seconds ago   Up 2 seconds   0.0.0.0:27017->27017/tcp     database
+```
 
-    Una volta che i container sono attivi, puoi accedere all’interfaccia grafica tramite:
+**3. Accesso all'interfaccia grafica (GUI)**
 
-    ```bash
-    http://localhost:3000
-    ```
+Una volta che i container sono attivi, puoi accedere all’interfaccia grafica tramite:
 
-    > ❗ Il database `library_example` non sarà visibile in DbGate finché non conterrà almeno una collezione con dati.
+```bash
+http://localhost:3000
+```
 
-    > 👍🏻 Per renderlo visibile, esegui lo script `seed.js` o crea un documento manualmente.
+> ❗ Il database `library_example` non sarà visibile in DbGate finché non conterrà almeno una collezione con dati.
+
+> 👍🏻 Per renderlo visibile, esegui lo script `seed.js` o crea un documento manualmente.
 
 
 ## 🗃️ Struttura del database
@@ -166,31 +168,37 @@ In essa troverai esempi per:
 
 Per popolare il database con i dati di esempio:
 
-1. Assicurati che il container di MongoDB sia in esecuzione:
+**1. Assicurati che il container di MongoDB sia in esecuzione:**
 
-    ```bash
-    docker ps
-    ```
+```bash
+docker ps
+```
 
-2. Se il container non è attivo, avvialo:
+**2. Se il container non è attivo, avvialo:**
 
-    ```bash
-    docker start database 
-    ```
+```bash
+docker start database 
+```
 
-    > `database` è il nome del container
+> `database` è il nome del container
 
-3. Popola il database eseguendo lo script `seed.js`:
+**3. Popola il database eseguendo lo script `seed.js`:**
 
-    ```bash
-    docker exec -i database mongosh biblioteca < ./seed.js
-    ```
+```bash
+docker exec -i database mongosh library_example < ./seed.js
+```
 
-    > 📂 Assicurati che il file seed.js si trovi nella cartella radice del progetto oppure modifica il path nel comando in 
-    >    base alla sua posizione.
+> 📂 Assicurati che il file seed.js si trovi nella cartella radice del progetto oppure modifica il path nel comando in 
+>    base alla sua posizione.
 
-4. Apri DBGate su `http://localhost:3000` e premi **Refresh**: il database `library_example` ora sarà visibile con le 
-   collezioni popolate.
+**4. Riavvia i container**
+
+```bash
+docker stop database dbgate
+docker start database dbgate
+```
+
+**5. Apri DBGate su `http://localhost:3001`: il database `library_example` ora sarà visibile con le collezioni popolate.**
 
 
 ## 🛑 Arresto dei containers
@@ -200,3 +208,5 @@ Al termine del lavoro con il database, è buona pratica fermare i container per 
 ```bash
 docker-compose down
 ```
+
+> 📝 Questo comando ferma e rimuove i container creati da docker-compose, liberando risorse.
